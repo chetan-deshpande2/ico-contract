@@ -1,4 +1,3 @@
-
 async function main() {
   const Token = await ethers.getContractFactory('Token');
   const contract = await Token.deploy();
