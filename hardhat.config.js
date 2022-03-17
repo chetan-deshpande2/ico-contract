@@ -11,16 +11,6 @@ task('accounts', 'Prints the list of accounts', async (taskArgs, hre) => {
 });
 
 module.exports = {
-  networks: {
-    rinkeby: {
-      url: process.env.RINKEBY_RPC_URL,
-      accounts: [
-        process.env.RINKEBY_PRIVATE_KEY_ACCOUNT1,
-        process.env.RINKEBY_PRIVATE_KEY_ACCOUNT3
-      ],
-      gasPrice: 8000000000
-    }
-  },
   solidity: {
     compilers: [
       {
@@ -28,6 +18,17 @@ module.exports = {
       }
     ]
   },
+  networks: {
+    rinkeby: {
+      url: process.env.RINKEBY_RPC_URL,
+      accounts: [
+        process.env.RINKEBY_PRIVATE_KEY_ACCOUNT1,
+        process.env.RINKEBY_PRIVATE_KEY_ACCOUNT3
+      ],
+      gasPrice: 3000000000
+    }
+  },
+
   etherscan: {
     apiKey: process.env.API_KEY
   }

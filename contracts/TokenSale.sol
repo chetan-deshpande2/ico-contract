@@ -36,9 +36,7 @@ contract TokenSale is Ownable {
         AggregatorInterface(0x8A753747A1Fa494EC906cE90E9f37563A8AF630e);
 
     IERC20 public token;
-
-    mapping(address => uint256) public usersId;
-    mapping(uint256 => address) public usersAddresses;
+    
 
     event TokenPurchasedEvent(
         address _purchasingAccount,
@@ -90,6 +88,7 @@ contract TokenSale is Ownable {
 
     // this will buy tokens equal to amount entered
     function buyTokens(uint256 _amount) public payable isNotPaused {
+        uint256 currPrice = getCurrentPriceInUSD();
         uint256 recievingAmount;
         uint256 amountToPay;
 
@@ -98,16 +97,15 @@ contract TokenSale is Ownable {
         if (msg.value > amountToPay) {
             payable(msg.sender).transfer(msg.value - amountToPay);
         }
+        payable(admin).transfer(amountToPay);
         if (totalTokens == 0) {
             setTokenStage();
         }
-
-        payable(admin).transfer(amountToPay);
-
-        recievingAmount = _amount;
+         recievingAmount = _amount;
         totalTokenSold = totalTokenSold + recievingAmount;
 
         token.safeTransfer(msg.sender, recievingAmount);
+        emit TokenPurchasedEvent(msg.sender,recievingAmount, amountToPay,currPrice)
     }
 
     function setTokenStage() internal {
