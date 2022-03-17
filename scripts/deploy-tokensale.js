@@ -1,6 +1,6 @@
 async function main() {
-  let admin = '0xb06C23E4729615976378EF7A1699Ce6B79acD4f1';
-  let tokenAddress = '0x3F50Ba973fD0B9a100fa7729630146E76CaD56A4';
+  let admin = '0xA7823936F974e2a996FdF25B5E36DeA29A5B52E1';
+  let tokenAddress = '0xEe01acA23F80291F9eB3B8E3de1D177Af85c339f';
   const Token = await ethers.getContractFactory('TokenSale');
   const contract = await Token.deploy(admin, tokenAddress);
 
